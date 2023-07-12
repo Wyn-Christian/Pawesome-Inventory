@@ -13,6 +13,7 @@ import PersonIcon from "@mui/icons-material/Person";
 import CategoryIcon from "@mui/icons-material/Category";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import ReceiptIcon from "@mui/icons-material/Receipt";
+import { useGetCountsQuery } from "../app/services/utils";
 
 const SummaryTitle = ({ Icon, num, title, color }) => {
 	return (
@@ -42,31 +43,34 @@ const SummaryTitle = ({ Icon, num, title, color }) => {
 };
 
 function Dashboard() {
+	const {
+		data: counts = { suppliers: 0, categories: 0, products: 0, sales: 0 },
+	} = useGetCountsQuery();
 	return (
 		<Box>
 			<Typography variant="h3">Dashboard</Typography>
 			<Grid container spacing={3}>
 				<SummaryTitle
 					Icon={PersonIcon}
-					num={3}
+					num={counts.suppliers}
 					title="Suppliers"
 					color="blue"
 				/>
 				<SummaryTitle
 					Icon={CategoryIcon}
-					num={3}
+					num={counts.categories}
 					title="Categories"
 					color="blueviolet"
 				/>
 				<SummaryTitle
 					Icon={ShoppingCartIcon}
-					num={3}
+					num={counts.products}
 					title="Products"
 					color="orange"
 				/>
 				<SummaryTitle
 					Icon={ReceiptIcon}
-					num={3}
+					num={counts.sales}
 					title="Sales"
 					color="green"
 				/>

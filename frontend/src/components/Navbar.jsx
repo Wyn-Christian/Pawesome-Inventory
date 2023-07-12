@@ -201,16 +201,16 @@ const AdminDrawer = ({ handleDrawerToggle }) => {
 								icon: DateRangeIcon,
 								link: "/sales-report",
 							},
-							{
-								title: "Monthly Sale",
-								icon: CalendarMonthIcon,
-								link: "/sales-report/monthly",
-							},
-							{
-								title: "Daily Sale",
-								icon: TodayIcon,
-								link: "/sales-report/daily",
-							},
+							// {
+							// 	title: "Monthly Sale",
+							// 	icon: CalendarMonthIcon,
+							// 	link: "/sales-report/monthly",
+							// },
+							// {
+							// 	title: "Daily Sale",
+							// 	icon: TodayIcon,
+							// 	link: "/sales-report/daily",
+							// },
 						]}
 						Icon={ReceiptIcon}
 						handleDrawerToggle={handleDrawerToggle}

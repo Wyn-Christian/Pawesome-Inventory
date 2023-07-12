@@ -29,6 +29,7 @@ import AddSales from "./routes/Sales/AddSales.jsx";
 import EditSupplier from "./routes/Suppliers/EditSupplier.jsx";
 import EditCategories from "./routes/Categories/EditCategories.jsx";
 import EditProduct from "./routes/Products/EditProduct.jsx";
+import SalesReport from "./routes/Sales Report/SalesReport.jsx";
 
 const router = createBrowserRouter([
 	{
@@ -118,7 +119,7 @@ const router = createBrowserRouter([
 						children: [
 							{
 								index: true,
-								element: <h1>Date range thing</h1>,
+								element: <SalesReport />,
 							},
 							{
 								path: "monthly",

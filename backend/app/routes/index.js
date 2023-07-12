@@ -8,6 +8,8 @@ const category_services = require("../services/category");
 const media_services = require("../services/media");
 const product_services = require("../services/product");
 const sale_services = require("../services/sale");
+const utils_services = require("../services/utils");
+const sales_report_services = require("../services/sales_report");
 
 const storage = (file_dest) =>
 	multer.diskStorage({
@@ -24,6 +26,10 @@ const storage = (file_dest) =>
 const upload_media = multer({
 	storage: storage("medias"),
 });
+
+// Utils Routes
+router.get("/utils/counts", utils_services.counts);
+router.post("/utils/sales-by-range", sales_report_services.sales_by_range);
 
 // User Routes
 router.post("/user/create", user_services.create);

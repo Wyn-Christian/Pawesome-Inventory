@@ -22,13 +22,17 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { useGetProductsQuery } from "../../app/services/product";
 import { useEffect, useState } from "react";
 import { PHPPrice } from "../../app/utils";
+import { useCreateSaleMutation } from "../../app/services/sale";
+import { enqueueSnackbar } from "notistack";
 
 function AddSales() {
 	const navigate = useNavigate();
 	const { data: products = [] } = useGetProductsQuery();
 	const [product, setProduct] = useState(null);
 	const [total, setTotal] = useState(0);
+	const [date, setDate] = useState(null);
 	const [quantity, setQuantity] = useState(1);
+	const [createSale] = useCreateSaleMutation();
 
 	const [inputValue, setInputValue] = useState("");
 	const formik = useFormik({
@@ -38,7 +42,6 @@ function AddSales() {
 			stock: 0,
 			sale_price: 0,
 			total: 0,
-			date: "",
 		},
 	});
 	useEffect(() => {
@@ -47,22 +50,35 @@ function AddSales() {
 			stock: product?.quantity,
 			sale_price: product?.sale_price,
 		});
+		setTotal(quantity * product?.sale_price);
 	}, [product]);
-
-	useEffect(() => {
-		if (product) {
-			formik.setValues({
-				total: product?.quantity * product?.sale_price,
-			});
-		}
-	}, [formik.values.quantity]);
 
 	const handleQuantityChange = (e) => {
 		if (product) {
 			setQuantity(e.target.value);
-			setTotal(quantity * product?.sale_price);
+			setTotal(e.target.value * product?.sale_price);
 		} else {
 			setTotal(0);
+		}
+	};
+
+	const submitHandle = async () => {
+		if (product) {
+			let data = {
+				product: product.id,
+				quantity,
+				price: total,
+				date,
+			};
+			await createSale(data)
+				.unwrap()
+				.then((res) => {
+					enqueueSnackbar("Sale Created Successfully", {
+						variant: "success",
+					});
+					navigate("/sales");
+				})
+				.catch((err) => console.log(err));
 		}
 	};
 
@@ -157,11 +173,19 @@ function AddSales() {
 							</Grid>
 							<Grid xs={12} md={6}>
 								<LocalizationProvider dateAdapter={AdapterLuxon}>
-									<DatePicker label="Date" />
+									<DatePicker
+										label="Date"
+										value={date}
+										onChange={(newValue) => {
+											setDate(newValue);
+										}}
+									/>
 								</LocalizationProvider>
 							</Grid>
 							<Grid xs={12} sx={{ m: "auto" }}>
-								<Button variant="contained">Add Sale</Button>
+								<Button variant="contained" onClick={submitHandle}>
+									Add Sale
+								</Button>
 							</Grid>
 						</Grid>
 					</Paper>

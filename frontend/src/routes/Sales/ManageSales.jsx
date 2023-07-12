@@ -58,7 +58,7 @@ function Sales() {
 			</Typography>
 
 			<DataGrid
-				rowHeight={100}
+				rowHeight={60}
 				rows={sales}
 				columns={columns}
 				pageSizeOptions={[5, 10, 25]}
