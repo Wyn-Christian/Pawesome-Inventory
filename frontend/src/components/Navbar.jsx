@@ -223,6 +223,7 @@ const AdminDrawer = ({ handleDrawerToggle }) => {
 
 function Navbar({ children }) {
 	const [mobileOpen, setMobileOpen] = useState(false);
+	const [isLogin, setIsLogin] = useState(false);
 
 	const handleDrawerToggle = () => {
 		setMobileOpen(!mobileOpen);
@@ -237,92 +238,102 @@ function Navbar({ children }) {
 		setAnchorEl(null);
 	};
 
-	return (
-		<Box display="flex">
-			<AppBar
-				position="fixed"
-				sx={{
-					zIndex: (theme) => theme.zIndex.drawer + 1,
-					width: { sm: `calc(100% - ${drawerWidth}px)` },
-					ml: { sm: `${drawerWidth}px` },
-				}}
-			>
-				<Toolbar>
-					<IconButton
-						color="inherit"
-						edge="start"
-						onClick={handleDrawerToggle}
-						sx={{ mr: 2, display: { sm: "none" } }}
-					>
-						<MenuIcon />
-					</IconButton>
-					<Box flexGrow={1}>
-						<Typography>time</Typography>
-					</Box>
-					<Box>
-						<Chip
-							avatar={
-								<Avatar alt="Natacha" src="/static/images/avatar/1.jpg" />
-							}
-							label="Avatar"
-							variant="outlined"
-							onClick={handleClick}
-						/>
-					</Box>
-					<Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
-						<MenuItem onClick={handleClose}>Profile</MenuItem>
-						<MenuItem onClick={handleClose}>Settings</MenuItem>
-						<MenuItem onClick={handleClose}>Logout</MenuItem>
-					</Menu>
-				</Toolbar>
-			</AppBar>
-			<Drawer
-				variant="permanent"
-				sx={{
-					width: drawerWidth,
-					flexShrink: 0,
-					[`& .MuiDrawer-paper`]: {
+	let content;
+	if (isLogin) {
+		content = <Box>{children}</Box>;
+	} else {
+		content = (
+			<Box display="flex">
+				<AppBar
+					position="fixed"
+					sx={{
+						zIndex: (theme) => theme.zIndex.drawer + 1,
+						width: { sm: `calc(100% - ${drawerWidth}px)` },
+						ml: { sm: `${drawerWidth}px` },
+					}}
+				>
+					<Toolbar>
+						<IconButton
+							color="inherit"
+							edge="start"
+							onClick={handleDrawerToggle}
+							sx={{ mr: 2, display: { sm: "none" } }}
+						>
+							<MenuIcon />
+						</IconButton>
+						<Box flexGrow={1}>
+							<Typography>time</Typography>
+						</Box>
+						<Box>
+							<Chip
+								avatar={
+									<Avatar
+										alt="Natacha"
+										src="/static/images/avatar/1.jpg"
+									/>
+								}
+								label="Avatar"
+								variant="outlined"
+								onClick={handleClick}
+							/>
+						</Box>
+						<Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
+							<MenuItem onClick={handleClose}>Profile</MenuItem>
+							<MenuItem onClick={handleClose}>Settings</MenuItem>
+							<MenuItem onClick={handleClose}>Logout</MenuItem>
+						</Menu>
+					</Toolbar>
+				</AppBar>
+				<Drawer
+					variant="permanent"
+					sx={{
 						width: drawerWidth,
-						boxSizing: "border-box",
-					},
-					display: { xs: "none", sm: "block" },
-				}}
-				open
-			>
-				<AdminDrawer />
-			</Drawer>
-			{/* Mobile */}
-			<Drawer
-				variant="temporary"
-				open={mobileOpen}
-				onClose={handleDrawerToggle}
-				ModalProps={{
-					keepMounted: true,
-				}}
-				sx={{
-					display: { xs: "block", sm: "none" },
-					[`& .MuiDrawer-paper`]: {
-						boxSizing: "border-size",
-						width: drawerWidth,
-					},
-				}}
-			>
-				<AdminDrawer handleDrawerToggle={handleDrawerToggle} />
-			</Drawer>
-			<Box
-				component="main"
-				sx={{
-					flexGrow: 1,
-					paddingX: 3,
-					pt: 2,
-					width: { xs: "100%", sm: `calc(100% - ${drawerWidth}px)` },
-				}}
-			>
-				<Toolbar />
-				{children}
+						flexShrink: 0,
+						[`& .MuiDrawer-paper`]: {
+							width: drawerWidth,
+							boxSizing: "border-box",
+						},
+						display: { xs: "none", sm: "block" },
+					}}
+					open
+				>
+					<AdminDrawer />
+				</Drawer>
+				{/* Mobile */}
+				<Drawer
+					variant="temporary"
+					open={mobileOpen}
+					onClose={handleDrawerToggle}
+					ModalProps={{
+						keepMounted: true,
+					}}
+					sx={{
+						display: { xs: "block", sm: "none" },
+						[`& .MuiDrawer-paper`]: {
+							boxSizing: "border-size",
+							width: drawerWidth,
+						},
+					}}
+				>
+					<AdminDrawer handleDrawerToggle={handleDrawerToggle} />
+				</Drawer>
+				<Box
+					component="main"
+					sx={{
+						flexGrow: 1,
+						paddingX: 3,
+						pt: 2,
+						width: { xs: "100%", sm: `calc(100% - ${drawerWidth}px)` },
+					}}
+				>
+					<Toolbar />
+					{children}
+				</Box>
 			</Box>
-		</Box>
-	);
+		);
+	}
+
+	return <Box>{content}</Box>;
 }
 
 export default Navbar;
