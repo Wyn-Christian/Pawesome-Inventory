@@ -99,6 +99,7 @@ function Categories() {
 						sx={{
 							boxShadow: 2,
 							border: 1,
+							backgroundColor: "white",
 						}}
 					/>
 				</Grid>

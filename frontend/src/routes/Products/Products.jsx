@@ -88,6 +88,7 @@ function Products() {
 				sx={{
 					boxShadow: 2,
 					border: 1,
+					backgroundColor: "white",
 				}}
 			/>
 		</Box>

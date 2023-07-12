@@ -68,6 +68,7 @@ function Sales() {
 				sx={{
 					boxShadow: 2,
 					border: 1,
+					backgroundColor: "white",
 				}}
 			/>
 		</Box>
