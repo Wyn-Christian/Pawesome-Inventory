@@ -11,7 +11,15 @@ import "@fontsource/roboto/700.css";
 
 function Root() {
 	return (
-		<Box>
+		<Box
+			sx={{
+				backgroundImage: `url("background.jpg")`,
+				backgroundSize: "cover",
+				backgroundAttachment: "fixed",
+				backgroundPositionX: "center",
+				minHeight: "120vh",
+			}}
+		>
 			<CssBaseline />
 			<Navbar>
 				<Outlet />

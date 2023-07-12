@@ -30,6 +30,7 @@ import EditSupplier from "./routes/Suppliers/EditSupplier.jsx";
 import EditCategories from "./routes/Categories/EditCategories.jsx";
 import EditProduct from "./routes/Products/EditProduct.jsx";
 import SalesReport from "./routes/Sales Report/SalesReport.jsx";
+import Login from "./routes/Login.jsx";
 
 const router = createBrowserRouter([
 	{
@@ -45,7 +46,7 @@ const router = createBrowserRouter([
 					},
 					{
 						path: "/login",
-						element: <h1>Login</h1>,
+						element: <Login />,
 					},
 					{
 						path: "/suppliers",

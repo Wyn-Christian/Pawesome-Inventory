@@ -60,7 +60,7 @@ function SalesReport() {
 					/>
 					<ChevronRightIcon sx={{ fontSize: 50 }} />
 					<DatePicker
-						label="Start Date"
+						label="End Date"
 						value={endDate}
 						onChange={(newValue) => {
 							setEndDate(newValue);
