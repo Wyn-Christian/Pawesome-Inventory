@@ -14,30 +14,37 @@ import { DataGrid } from "@mui/x-data-grid";
 import ListActions from "../../components/ListActions";
 import {
 	useCreateCategoryMutation,
+	useDeleteCategoryMutation,
 	useGetCategoriesQuery,
 } from "../../app/services/category";
 import { useState } from "react";
 import { enqueueSnackbar } from "notistack";
-
-const columns = [
-	{ field: "name", headerName: "Name", width: 250 },
-
-	{
-		field: "id",
-		headerName: "Action",
-		headerAlign: "center",
-		width: 150,
-		renderCell: (params) => (
-			<ListActions to="categories" params={params} />
-		),
-	},
-];
 
 function Categories() {
 	const { data: categories = [] } = useGetCategoriesQuery();
 	const [addCategory] = useCreateCategoryMutation();
 
 	const [CategoryField, setCategoryField] = useState("");
+	const [deleteCategory] = useDeleteCategoryMutation();
+
+	const columns = [
+		{ field: "name", headerName: "Name", width: 250 },
+
+		{
+			field: "id",
+			headerName: "Action",
+			headerAlign: "center",
+			width: 150,
+			renderCell: (params) => (
+				<ListActions
+					to="categories"
+					params={params}
+					deleteFunction={deleteCategory}
+					name="Category"
+				/>
+			),
+		},
+	];
 
 	const handleAddCategory = async () => {
 		if (CategoryField) {
