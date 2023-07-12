@@ -5,7 +5,7 @@ let theme = createTheme({
 	// 	fontFamily: "Helvetica Neue",
 	// },
 	palette: {
-		mode: "dark",
+		mode: "light",
 		primary: {
 			main: "#7ACBEE",
 		},
