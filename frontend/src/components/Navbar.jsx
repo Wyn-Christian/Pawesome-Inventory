@@ -113,7 +113,7 @@ const AdminDrawer = ({ handleDrawerToggle }) => {
   return (
     <div>
       <Toolbar>
-        <Typography fontSize={13}>PAWESOME PET FOOD STORE</Typography>
+        <Typography fontSize={20}>PAWESOME PET FOOD STORE</Typography>
       </Toolbar>
       <Divider />
       <Box sx={{ overflow: "auto" }}>
